@@ -1,8 +1,14 @@
 package vn.example.itviec.domain.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginDTO {
+    @NotBlank(message="username không được để trống")
     private String username;
+
+    @NotBlank(message="username không được để trống")
     private String password;
+    
     public String getUsername() {
         return username;
     }

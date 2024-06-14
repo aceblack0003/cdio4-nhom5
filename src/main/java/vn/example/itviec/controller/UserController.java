@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import vn.example.itviec.domain.User;
 import vn.example.itviec.service.UserService;
-import vn.example.itviec.service.error.IdInvalidException;
+import vn.example.itviec.util.error.IdInvalidException;
 
 @RestController
 public class UserController {
