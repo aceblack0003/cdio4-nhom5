@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import vn.example.itviec.domain.Company;
+import vn.example.itviec.domain.User;
 import vn.example.itviec.domain.dto.Meta;
 import vn.example.itviec.domain.dto.ResultPaginationDTO;
 import vn.example.itviec.repository.CompanyRepository;
@@ -25,8 +27,8 @@ public class CompanyService {
         return this.companyRepository.save(c);
     }
 
-    public ResultPaginationDTO handleGetCompany(Pageable pageable) {
-        Page<Company> pCompany = this.companyRepository.findAll(pageable);
+    public ResultPaginationDTO handleGetCompany(Specification<Company> spec, Pageable pageable) {
+        Page<Company> pCompany = this.companyRepository.findAll(spec, pageable);
         ResultPaginationDTO rs = new ResultPaginationDTO();
         Meta mt = new Meta();
 

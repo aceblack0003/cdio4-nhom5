@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import vn.example.itviec.domain.User;
@@ -19,12 +20,15 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    public User handleCreateUser(User user){
+
+    public User handleCreateUser(User user) {
         return this.userRepository.save(user);
     }
-    public void handleDeleteUser(long id){
+
+    public void handleDeleteUser(long id) {
         this.userRepository.deleteById(id);
     }
+
     public User fetchUserById(long id) {
         Optional<User> userOptional = this.userRepository.findById(id);
         if (userOptional.isPresent()) {
@@ -33,8 +37,8 @@ public class UserService {
         return null;
     }
 
-   public ResultPaginationDTO fetchAllUser(Pageable pageable) {
-        Page<User> pageUser = this.userRepository.findAll(pageable);
+    public ResultPaginationDTO fetchAllUser(Specification<User> spec, Pageable pageable) {
+        Page<User> pageUser = this.userRepository.findAll(spec, pageable);
         ResultPaginationDTO rs = new ResultPaginationDTO();
         Meta mt = new Meta();
 
@@ -49,6 +53,7 @@ public class UserService {
 
         return rs;
     }
+
     public User handleUpdateUser(User reqUser) {
         User currentUser = this.fetchUserById(reqUser.getId());
         if (currentUser != null) {
@@ -61,7 +66,7 @@ public class UserService {
         return currentUser;
     }
 
-    public User handleGetUserByUsername(String username){
+    public User handleGetUserByUsername(String username) {
         return this.userRepository.findByEmail(username);
     }
 }
