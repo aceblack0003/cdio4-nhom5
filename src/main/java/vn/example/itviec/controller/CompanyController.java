@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,8 +25,10 @@ import vn.example.itviec.domain.Company;
 import vn.example.itviec.domain.User;
 import vn.example.itviec.domain.dto.ResultPaginationDTO;
 import vn.example.itviec.service.CompanyService;
+import vn.example.itviec.util.annotation.ApiMessage;
 
 @RestController
+@RequestMapping("/api/v1")
 public class CompanyController {
     private final CompanyService companyService;
 
@@ -40,9 +43,10 @@ public class CompanyController {
     }
 
     @GetMapping("/companies")
+    @ApiMessage("Fetch companies")
     public ResponseEntity<ResultPaginationDTO> getCompany(
-             @Filter Specification<Company> spec,Pageable pageable){
-        return ResponseEntity.ok(this.companyService.handleGetCompany(spec,pageable));
+            @Filter Specification<Company> spec, Pageable pageable) {
+        return ResponseEntity.ok(this.companyService.handleGetCompany(spec, pageable));
     }
 
     @PutMapping("/companies")
