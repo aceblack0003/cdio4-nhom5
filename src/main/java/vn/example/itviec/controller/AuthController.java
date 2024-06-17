@@ -7,14 +7,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import vn.example.itviec.domain.dto.LoginDTO;
-import vn.example.itviec.domain.dto.RestLoginDTO;
+import vn.example.itviec.domain.dto.ResLoginDTO;
 import vn.example.itviec.util.SecurityUtil;
 
 @RestController
+@RequestMapping("/api/v1")
 public class AuthController {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -27,7 +29,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<RestLoginDTO> login(@Valid @RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<ResLoginDTO> login(@Valid @RequestBody LoginDTO loginDTO) {
         // Nạp input gồm username/password vào Security
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 loginDTO.getUsername(), loginDTO.getPassword());
@@ -39,7 +41,7 @@ public class AuthController {
         String access_token = this.securityUtil.createToken(authentication);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        RestLoginDTO res = new RestLoginDTO();
+        ResLoginDTO res = new ResLoginDTO();
         res.setAccessToken(access_token);
         return ResponseEntity.ok().body(res);
     }
