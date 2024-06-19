@@ -1,4 +1,4 @@
-package vn.example.itviec.domain;
+package vn.example.itviec.domain.response;
 
 public class RestResponse<T> {
     private int statusCode;

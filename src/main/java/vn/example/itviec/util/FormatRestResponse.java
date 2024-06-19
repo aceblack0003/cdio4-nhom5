@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import jakarta.servlet.http.HttpServletResponse;
-import vn.example.itviec.domain.RestResponse;
+import vn.example.itviec.domain.response.RestResponse;
 import vn.example.itviec.util.annotation.ApiMessage;
 
 @ControllerAdvice

@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 
 import vn.example.itviec.domain.Company;
 import vn.example.itviec.domain.User;
-import vn.example.itviec.domain.dto.Meta;
-import vn.example.itviec.domain.dto.ResultPaginationDTO;
+import vn.example.itviec.domain.response.ResultPaginationDTO;
 import vn.example.itviec.repository.CompanyRepository;
 
 @Service
@@ -30,7 +29,7 @@ public class CompanyService {
     public ResultPaginationDTO handleGetCompany(Specification<Company> spec, Pageable pageable) {
         Page<Company> pCompany = this.companyRepository.findAll(spec, pageable);
         ResultPaginationDTO rs = new ResultPaginationDTO();
-        Meta mt = new Meta();
+        ResultPaginationDTO.Meta mt = new ResultPaginationDTO.Meta();
 
         mt.setPage(pCompany.getNumber() + 1);
         mt.setPageSize(pCompany.getSize());

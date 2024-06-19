@@ -1,4 +1,4 @@
-package vn.example.itviec.domain.dto;
+package vn.example.itviec.domain.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

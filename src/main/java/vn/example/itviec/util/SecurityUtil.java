@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.util.Base64;
 
-import vn.example.itviec.domain.dto.ResLoginDTO;
+import vn.example.itviec.domain.response.ResLoginDTO;
 
 @Service
 public class SecurityUtil {

@@ -18,10 +18,10 @@ import com.turkraft.springfilter.boot.Filter;
 
 import jakarta.validation.Valid;
 import vn.example.itviec.domain.User;
-import vn.example.itviec.domain.dto.ResCreateUserDTO;
-import vn.example.itviec.domain.dto.ResUpdateUserDTO;
-import vn.example.itviec.domain.dto.ResUserDTO;
-import vn.example.itviec.domain.dto.ResultPaginationDTO;
+import vn.example.itviec.domain.response.ResCreateUserDTO;
+import vn.example.itviec.domain.response.ResUpdateUserDTO;
+import vn.example.itviec.domain.response.ResUserDTO;
+import vn.example.itviec.domain.response.ResultPaginationDTO;
 import vn.example.itviec.service.UserService;
 import vn.example.itviec.util.annotation.ApiMessage;
 import vn.example.itviec.util.error.IdInvalidException;

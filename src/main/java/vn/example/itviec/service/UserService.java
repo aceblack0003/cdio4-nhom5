@@ -10,11 +10,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import vn.example.itviec.domain.User;
-import vn.example.itviec.domain.dto.Meta;
-import vn.example.itviec.domain.dto.ResCreateUserDTO;
-import vn.example.itviec.domain.dto.ResUpdateUserDTO;
-import vn.example.itviec.domain.dto.ResUserDTO;
-import vn.example.itviec.domain.dto.ResultPaginationDTO;
+import vn.example.itviec.domain.response.ResCreateUserDTO;
+import vn.example.itviec.domain.response.ResUpdateUserDTO;
+import vn.example.itviec.domain.response.ResUserDTO;
+import vn.example.itviec.domain.response.ResultPaginationDTO;
 import vn.example.itviec.repository.UserRepository;
 
 @Service
@@ -45,7 +44,7 @@ public class UserService {
     public ResultPaginationDTO fetchAllUser(Specification<User> spec, Pageable pageable) {
         Page<User> pageUser = this.userRepository.findAll(spec, pageable);
         ResultPaginationDTO rs = new ResultPaginationDTO();
-        Meta mt = new Meta();
+        ResultPaginationDTO.Meta mt = new ResultPaginationDTO.Meta();
 
         mt.setPage(pageable.getPageNumber() + 1);
         mt.setPageSize(pageable.getPageSize());

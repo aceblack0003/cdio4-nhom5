@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import vn.example.itviec.domain.User;
-import vn.example.itviec.domain.dto.LoginDTO;
-import vn.example.itviec.domain.dto.ResLoginDTO;
+import vn.example.itviec.domain.request.ReqLoginDTO;
+import vn.example.itviec.domain.response.ResLoginDTO;
 import vn.example.itviec.service.UserService;
 import vn.example.itviec.util.SecurityUtil;
 import vn.example.itviec.util.annotation.ApiMessage;
@@ -44,7 +44,7 @@ public class AuthController {
         }
 
         @PostMapping("/auth/login")
-        public ResponseEntity<ResLoginDTO> login(@Valid @RequestBody LoginDTO loginDto) {
+        public ResponseEntity<ResLoginDTO> login(@Valid @RequestBody ReqLoginDTO loginDto) {
                 // Nạp input gồm username/password vào Security
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                                 loginDto.getUsername(), loginDto.getPassword());
