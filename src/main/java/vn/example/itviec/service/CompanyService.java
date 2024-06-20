@@ -12,14 +12,19 @@ import vn.example.itviec.domain.Company;
 import vn.example.itviec.domain.User;
 import vn.example.itviec.domain.response.ResultPaginationDTO;
 import vn.example.itviec.repository.CompanyRepository;
+import vn.example.itviec.repository.UserRepository;
 
 @Service
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
+    private final UserRepository userRepository;
 
-    public CompanyService(CompanyRepository companyRepository) {
+    public CompanyService(
+            CompanyRepository companyRepository,
+            UserRepository userRepository) {
         this.companyRepository = companyRepository;
+        this.userRepository = userRepository;
     }
 
     public Company handleCreateCompany(Company c) {
@@ -31,8 +36,8 @@ public class CompanyService {
         ResultPaginationDTO rs = new ResultPaginationDTO();
         ResultPaginationDTO.Meta mt = new ResultPaginationDTO.Meta();
 
-        mt.setPage(pCompany.getNumber() + 1);
-        mt.setPageSize(pCompany.getSize());
+        mt.setPage(pageable.getPageNumber() + 1);
+        mt.setPageSize(pageable.getPageSize());
 
         mt.setPages(pCompany.getTotalPages());
         mt.setTotal(pCompany.getTotalElements());
@@ -56,6 +61,18 @@ public class CompanyService {
     }
 
     public void handleDeleteCompany(long id) {
+        Optional<Company> comOptional = this.companyRepository.findById(id);
+        if (comOptional.isPresent()) {
+            Company com = comOptional.get();
+            // fetch all user belong to this company
+            List<User> users = this.userRepository.findByCompany(com);
+            this.userRepository.deleteAll(users);
+        }
+
         this.companyRepository.deleteById(id);
+    }
+
+    public Optional<Company> findById(long id) {
+        return this.companyRepository.findById(id);
     }
 }

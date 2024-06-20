@@ -10,8 +10,8 @@ public class ResultPaginationDTO {
     private Object result;
 
     @Getter
-@Setter
-    public static class Meta{
+    @Setter
+    public static class Meta {
         private int page;
         private int pageSize;
         private int pages;
