@@ -40,12 +40,15 @@ public class AuthController {
     @Value("${user.jwt.refresh-token-validity-in-seconds}")
     private long refreshTokenExpiration;
 
-    public AuthController(AuthenticationManagerBuilder authenticationManagerBuilder,
-            SecurityUtil securityUtil, UserService userService, PasswordEncoder passwordEncoder) {
+    public AuthController(
+            AuthenticationManagerBuilder authenticationManagerBuilder,
+            SecurityUtil securityUtil,
+            UserService userService,
+            PasswordEncoder passwordEncoder) {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.securityUtil = securityUtil;
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;              
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/auth/login")

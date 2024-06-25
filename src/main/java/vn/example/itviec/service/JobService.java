@@ -22,7 +22,6 @@ import vn.example.itviec.repository.SkillRepository;
 @Service
 public class JobService {
 
-    
     private final JobRepository jobRepository;
     private final SkillRepository skillRepository;
     private final CompanyRepository companyRepository;
@@ -49,6 +48,7 @@ public class JobService {
             List<Skill> dbSkills = this.skillRepository.findByIdIn(reqSkills);
             j.setSkills(dbSkills);
         }
+
         // check company
         if (j.getCompany() != null) {
             Optional<Company> cOptional = this.companyRepository.findById(j.getCompany().getId());
