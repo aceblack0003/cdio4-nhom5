@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import vn.example.itviec.domain.Job;
@@ -32,6 +33,11 @@ public class SubscriberService {
         this.jobRepository = jobRepository;
         this.emailService = emailService;
     }
+
+    // @Scheduled(cron = "*/10 * * * * *")
+    // public void testCron() {
+    // System.out.println(">>> TEST CRON");
+    // }
 
     public boolean isExistsByEmail(String email) {
         return this.subscriberRepository.existsByEmail(email);
@@ -105,5 +111,9 @@ public class SubscriberService {
                 }
             }
         }
+    }
+
+    public Subscriber findByEmail(String email) {
+        return this.subscriberRepository.findByEmail(email);
     }
 }

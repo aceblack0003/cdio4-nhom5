@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import vn.example.itviec.domain.Subscriber;
 import vn.example.itviec.service.SubscriberService;
+import vn.example.itviec.util.SecurityUtil;
 import vn.example.itviec.util.annotation.ApiMessage;
 import vn.example.itviec.util.error.IdInvalidException;
 
@@ -46,4 +47,13 @@ public class SubscriberController {
         return ResponseEntity.ok().body(this.subscriberService.update(subsDB, subsRequest));
     }
 
+    @PostMapping("/subscribers/skills")
+    @ApiMessage("Get subscriber's skill")
+    public ResponseEntity<Subscriber> getSubscribersSkill() throws IdInvalidException {
+        String email = SecurityUtil.getCurrentUserLogin().isPresent() == true
+                ? SecurityUtil.getCurrentUserLogin().get()
+                : "";
+
+        return ResponseEntity.ok().body(this.subscriberService.findByEmail(email));
+    }
 }

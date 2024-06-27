@@ -1,9 +1,11 @@
 package vn.example.itviec.controller;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.transaction.Transactional;
 import vn.example.itviec.service.EmailService;
 import vn.example.itviec.service.SubscriberService;
 import vn.example.itviec.util.annotation.ApiMessage;
@@ -23,6 +25,8 @@ public class EmailController {
 
     @GetMapping("/email")
     @ApiMessage("Send simple email")
+    // @Scheduled(cron = "*/30 * * * * *")
+    // @Transactional
     public String sendSimpleEmail() {
         // this.emailService.sendSimpleEmail();
         // this.emailService.sendEmailSync("ads.hoidanit@gmail.com", "test send email",
