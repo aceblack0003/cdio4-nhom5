@@ -11,7 +11,7 @@ import vn.example.itviec.domain.Skill;
 
 @Repository
 public interface JobRepository extends JpaRepository<Job, Long>,
-        JpaSpecificationExecutor<Job> {
-                List<Job> findBySkillsIn(List<Skill> skills);
+                JpaSpecificationExecutor<Job> {
 
+        List<Job> findBySkillsIn(List<Skill> skills);
 }
