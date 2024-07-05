@@ -50,10 +50,10 @@ public class JobService {
         }
 
         // check company
-        if (j.getCompanies() != null) {
-            Optional<Company> cOptional = this.companyRepository.findById(j.getId());
+        if (j.getCompany() != null) {
+            Optional<Company> cOptional = this.companyRepository.findById(j.getCompany().getId());
             if (cOptional.isPresent()) {
-                j.getCompanies(cOptional.get());
+                j.setCompany(cOptional.get());
             }
         }
 
@@ -97,10 +97,10 @@ public class JobService {
         }
 
         // check company
-        if (j.getCompanies() != null) {
-            Optional<Company> cOptional = this.companyRepository.findById(j.getId());
+        if (j.getCompany() != null) {
+            Optional<Company> cOptional = this.companyRepository.findById(j.getCompany().getId());
             if (cOptional.isPresent()) {
-                jobInDB.getCompanies(cOptional.get());
+                jobInDB.setCompany(cOptional.get());
             }
         }
 

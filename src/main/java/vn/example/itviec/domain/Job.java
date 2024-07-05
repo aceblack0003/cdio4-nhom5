@@ -27,6 +27,7 @@ import lombok.Getter;
 import lombok.Setter;
 import vn.example.itviec.util.SecurityUtil;
 import vn.example.itviec.util.constant.LevelEnum;
+
 @Entity
 @Table(name = "jobs")
 @Getter
@@ -69,19 +70,13 @@ public class Job {
     @JoinTable(name = "job_skill", joinColumns = @JoinColumn(name = "job_id"), inverseJoinColumns = @JoinColumn(name = "skill_id"))
     private List<Skill> skills;
 
-    @ManyToMany(mappedBy = "jobList")
-    private List<Company> companies;
-
     @OneToMany(mappedBy = "job", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Resume> resumes;
-
-    @ManyToMany(mappedBy = "jobs")
-    private List<Resume> resumesList;
+    List<Resume> resumes;
 
     @PrePersist
     public void handleBeforeCreate() {
-        this.createdBy = SecurityUtil.getCurrentUserLogin().isPresent()
+        this.createdBy = SecurityUtil.getCurrentUserLogin().isPresent() == true
                 ? SecurityUtil.getCurrentUserLogin().get()
                 : "";
 
@@ -90,7 +85,7 @@ public class Job {
 
     @PreUpdate
     public void handleBeforeUpdate() {
-        this.updatedBy = SecurityUtil.getCurrentUserLogin().isPresent()
+        this.updatedBy = SecurityUtil.getCurrentUserLogin().isPresent() == true
                 ? SecurityUtil.getCurrentUserLogin().get()
                 : "";
 
