@@ -132,23 +132,12 @@ public class ResumeService {
 
         // remove sensitive data
         List<ResFetchResumeDTO> listResume = pageUser.getContent()
-    .stream()
-    .map(item -> {
-        try {
-            return this.getResume(item);
-        } catch (Exception e) {
-            // Log the exception and handle it as needed
-            // For example, return null or a default ResFetchResumeDTO
-            System.err.println("Error processing item: " + e.getMessage());
-            return null; // or new ResFetchResumeDTO();
-        }
-    })
-    .filter(Objects::nonNull) // Remove null values if any
-    .collect(Collectors.toList());
+                .stream().map(item -> this.getResume(item))
+                .collect(Collectors.toList());
 
-rs.setResult(listResume);
+        rs.setResult(listResume);
 
-return rs;
+        return rs;
     }
 
     public ResultPaginationDTO fetchResumeByUser(Pageable pageable) {
@@ -172,23 +161,12 @@ return rs;
         rs.setMeta(mt);
 
         // remove sensitive data
-        List<ResFetchResumeDTO> listResume = pageUser.getContent()
-    .stream()
-    .map(item -> {
-        try {
-            return this.getResume(item);
-        } catch (Exception e) {
-            // Log the exception and handle it as needed
-            // For example, return null or a default ResFetchResumeDTO
-            System.err.println("Error processing item: " + e.getMessage());
-            return null; // or new ResFetchResumeDTO();
-        }
-    })
-    .filter(Objects::nonNull) // Remove null values if any
-    .collect(Collectors.toList());
+        List<ResFetchResumeDTO> listResume = pageResume.getContent()
+                .stream().map(item -> this.getResume(item))
+                .collect(Collectors.toList());
 
-rs.setResult(listResume);
+        rs.setResult(listResume);
 
-return rs;
+        return rs;
     }
 }
